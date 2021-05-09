@@ -11,6 +11,7 @@ arch=('i686' 'x86_64' 'aarch64' 'armv7h' 'armv6h')
 url='http://github.com/bbonev/eoip'
 license=('GPL')
 optdepends=("${_pkgbase}-dkms")
+makedepends=('git')
 source=(
 	"${_pkgbase}-${pkgver}.tar.gz::http://github.com/bbonev/eoip/archive/refs/tags/v${pkgver}.tar.gz"
 	'0001-Simplify-Makefile-for-eoip-utility.patch'

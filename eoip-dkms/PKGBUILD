@@ -13,7 +13,6 @@ arch=('any')
 url='http://github.com/bbonev/eoip'
 license=('GPL')
 depends=('dkms')
-makedepends=('git')
 optdepends=("${_pkgbase}-utils")
 source=("${_pkgbase}-${pkgver}.tar.gz::http://github.com/bbonev/eoip/archive/refs/tags/v${pkgver}.tar.gz"
         "linux-${_commit}.tar.gz::http://github.com/raspberrypi/linux/archive/${_commit}.tar.gz"
