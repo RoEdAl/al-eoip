@@ -17,7 +17,7 @@ source=(
 	'0001-Simplify-Makefile-for-eoip-utility.patch'
 )
 sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
-            'fc2c05547c792d19bfc10d925309e1171c9138f0ffef1f115bf45cad348edcae')
+            'd52a73ae47ed1cfbbe42595a53fdd7b50abd5b289a1b58de4077b9c28eb85011')
 
 prepare() {
 	cd "${srcdir}/${_pkgbase}-${pkgver}"
