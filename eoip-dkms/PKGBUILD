@@ -15,7 +15,7 @@ license=('GPL')
 depends=('dkms')
 optdepends=("${_pkgbase}-utils")
 source=("${_pkgbase}-${pkgver}.tar.gz::http://github.com/bbonev/eoip/archive/refs/tags/v${pkgver}.tar.gz"
-        "linux-${_commit}.tar.gz::http://github.com/raspberrypi/linux/archive/${_commit}.tar.gz"
+        "linux-${_commit}.tar.gz::http://github.com/torvalds/linux/archive/${_commit}.tar.gz"
 	'Makefile'
 	'dkms.conf')
 sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
