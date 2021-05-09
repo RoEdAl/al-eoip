@@ -1,0 +1,26 @@
+From ded542e70d012d8ea00a499c13b741578d5f0fd1 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Sun, 9 May 2021 08:12:38 +0200
+Subject: [PATCH] Simplify Makefile for eoip utility
+
+
+diff --git a/Makefile b/Makefile
+index 1122fb0..d4669da 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,13 +1,7 @@
+-STRIP=strip
+-
+ all: eoip
+ 
+ eoip: eoipcr.c libnetlink.o
+-	$(CC) -Wall -Os -o eoip eoipcr.c libnetlink.o
+-	$(STRIP) eoip
++	$(CC) -o eoip eoipcr.c libnetlink.o
+ 
+ libnetlink.o: libnetlink.c libnetlink.h
+-	$(CC) -Wall -Os -c libnetlink.c
+-
+-clean:
+-	rm -f eoip libnetlink.o
++	$(CC) -c libnetlink.c
