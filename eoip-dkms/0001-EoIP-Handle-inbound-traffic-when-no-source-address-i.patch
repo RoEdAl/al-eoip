@@ -1,0 +1,20 @@
+From 563207d455915695ad0451e172cc6941576a84a8 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Fri, 14 May 2021 15:35:26 +0200
+Subject: [PATCH] EoIP: Handle inbound traffic when no source address is
+ specified
+
+
+diff --git a/net/ipv4/eoip.c b/net/ipv4/eoip.c
+index df1b96dac181..72f2b2b3b82d 100644
+--- a/net/ipv4/eoip.c
++++ b/net/ipv4/eoip.c
+@@ -118,7 +118,7 @@ static struct ip_tunnel *eoip_tunnel_lookup(struct net_device *dev,
+ 	int score, cand_score = 4;
+ 
+ 	for_each_ip_tunnel_rcu(t, ign->tunnels[h0]) {
+-		if (local != t->parms.iph.saddr ||
++		if ((t->parms.iph.saddr != 0 && local != t->parms.iph.saddr) ||
+ 				remote != t->parms.iph.daddr ||
+ 				key != t->parms.i_key ||
+ 				!(t->dev->flags & IFF_UP))

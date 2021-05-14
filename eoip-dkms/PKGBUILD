@@ -17,18 +17,20 @@ optdepends=("${_pkgbase}-utils")
 source=("${_pkgbase}-${pkgver}.tar.gz::http://github.com/bbonev/eoip/archive/refs/tags/v${pkgver}.tar.gz"
         "linux-${_commit}.tar.gz::http://github.com/torvalds/linux/archive/${_commit}.tar.gz"
 	'Makefile'
-	'dkms.conf')
+	'dkms.conf'
+	'0001-EoIP-Handle-inbound-traffic-when-no-source-address-i.patch')
 sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
             '6ece311a89ca3263afa4613d2911eeae37332d3237af7f4ab87cdc147faab8eb'
             'bf860f6823f1dc9d43b67df75273a0d9b5130c675f28cf98a89569d391973ef0'
-            '20a9544db679d645c235eeefab550d88ae52db2bacb17d9862518cf74852746e')
+            '20a9544db679d645c235eeefab550d88ae52db2bacb17d9862518cf74852746e'
+            '2fb2a32367f55d281c3b35b3fbf2e70ac6205c7b26f058bde3ce4ba218a42f1a')
 
 prepare() {
 	cd "${srcdir}/linux-${_commit}"
 	for p in eoip-gre-demux eoip; do
-		msg2 "Applying $p patch"
 		patch -p1 < ${srcdir}/${_pkgbase}-${pkgver}/kernel-patch/kernel-${_eoip_kernel_ver}-$p.patch
 	done
+	git apply ${srcdir}/0001-EoIP-Handle-inbound-traffic-when-no-source-address-i.patch
 }
 
 package() {
