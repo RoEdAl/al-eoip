@@ -15,9 +15,19 @@ makedepends=('git')
 source=(
 	"${_pkgbase}-${pkgver}.tar.gz::http://github.com/bbonev/eoip/archive/refs/tags/v${pkgver}.tar.gz"
 	'0001-Simplify-Makefile-for-eoip-utility.patch'
+	'eoip-iface.sh'
+	'eoip@.service'
+	'25-eoip.link'
+	'50-eoip.network'
+	'env'
 )
 sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
-            'd52a73ae47ed1cfbbe42595a53fdd7b50abd5b289a1b58de4077b9c28eb85011')
+            'd52a73ae47ed1cfbbe42595a53fdd7b50abd5b289a1b58de4077b9c28eb85011'
+            '69d1cb4d430403c5288c871f03db9f61baa3e10007a52d5d95303821e01ca8a3'
+            'f853a669277bed2f074cf74b811778e9672a22a2c3144685a288b353f56ba241'
+            '4c900d7272f6210eae732769fa086067307813517ff08a03168144057d1c5afb'
+            'b888cd415e94bfff8047d825bd0400a138a6a9cca238880fc720c90e507375bf'
+            'f6569b9647d3e7fb411c83ca7e650a87aa246553db848151ac3664d489c10240')
 
 prepare() {
 	cd "${srcdir}/${_pkgbase}-${pkgver}"
@@ -35,5 +45,19 @@ build() {
 }
 
 package() {
-	install -Dsm755 ${srcdir}/${_pkgbase}-${pkgver}/eoip  ${pkgdir}/usr/bin/eoip
+	install -d -m 0755 ${pkgdir}/usr/bin
+	install -p -m 0755 ${srcdir}/${_pkgbase}-${pkgver}/eoip ${pkgdir}/usr/bin/eoip
+
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/system
+	install -p -m 0644 ${srcdir}/eoip@.service ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service
+
+	install -d -m 0755 ${pkgdir}/usr/lib/${_pkgbase}
+	install -p -m 0755 ${srcdir}/eoip-iface.sh ${pkgdir}/usr/lib/${_pkgbase}/${_pkgbase}-iface.sh
+
+	install -d -m 0755 ${pkgdir}/etc/conf.d
+	install -p -m 0644 ${srcdir}/env ${pkgdir}/etc/conf.d/${_pkgbase}
+
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/network
+	install -p -m 0644 ${srcdir}/25-eoip.link ${pkgdir}/usr/lib/systemd/network/25-${_pkgbase}.link
+	install -p -m 0644 ${srcdir}/50-eoip.network ${pkgdir}/usr/lib/systemd/network/50-${_pkgbase}.network
 }

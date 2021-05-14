@@ -1,0 +1,15 @@
+[Unit]
+Description=EoIP tunnel compatible with MikroTik RouterOS
+Wants=network.target
+ 
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/etc/conf.d/%p
+EnvironmentFile=-/etc/conf.d/%p-%I
+ExecStart=/usr/lib/%p/%p-iface.sh %I start
+ExecStop=/usr/lib/%p/%p-iface.sh %I stop
+
+[Install]
+WantedBy=multi-user.target
+DefaultInstance=eoip

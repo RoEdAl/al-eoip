@@ -1,0 +1,6 @@
+[Match]
+OriginalName=eoip
+
+[Link]
+Description=Kernel mode EOIP tunnel compatible with MikroTik RouterOS
+MACAddress=00:00:5E:80:00:00
