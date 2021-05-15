@@ -29,6 +29,8 @@ sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
             'b888cd415e94bfff8047d825bd0400a138a6a9cca238880fc720c90e507375bf'
             'f6569b9647d3e7fb411c83ca7e650a87aa246553db848151ac3664d489c10240')
 
+backup=("etc/conf.d/${_pkgbase}")
+
 prepare() {
 	cd "${srcdir}/${_pkgbase}-${pkgver}"
 	for f in "${source[@]}"; do
