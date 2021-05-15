@@ -1,8 +1,11 @@
-# Kernel mode EOIP (Ethernet Over IP) tunnel compatible with MikroTik RouterOS [Arch Linux packages]
+# Kernel mode EoIP (Ethernet Over IP) tunnel compatible with MikroTik RouterOS [Arch Linux packages]
 
 Two packages:
+* [`eoip-dkms`](eoip-dkms) - kernel modules,
+* [`eoip-utils`](eoip-utils) - management utilities.
 
-* [`eoip-dkms`](eoip-dkms) - kernel modules
-* [`eoip-utils`](eoip-utils) - management utilities
+----
 
-More info: https://github.com/bbonev/eoip
+More info:
+* https://github.com/bbonev/eoip,
+* https://wiki.mikrotik.com/wiki/Manual:Interface/EoIP.
