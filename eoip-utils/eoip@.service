@@ -14,5 +14,4 @@ ExecStart=/usr/lib/%p/%p-iface.sh %I start
 ExecStop=/usr/lib/%p/%p-iface.sh %I stop
 
 [Install]
-WantedBy=multi-user.target
 DefaultInstance=eoip

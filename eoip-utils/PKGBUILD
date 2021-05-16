@@ -17,6 +17,7 @@ source=(
 	'0001-Simplify-Makefile-for-eoip-utility.patch'
 	'eoip-iface.sh'
 	'eoip@.service'
+	'wanted-by.conf'
 	'25-eoip.link'
 	'50-eoip.network'
 	'env'
@@ -24,7 +25,8 @@ source=(
 sha256sums=('b4ebbbbbd37b5e957ac237188e672e20c555a6c7e85f1725e48e8033e08a7fc3'
             'd52a73ae47ed1cfbbe42595a53fdd7b50abd5b289a1b58de4077b9c28eb85011'
             '197bfc3ec5587a81046d0c6bd655a4ebfd3149cfdcf9233b3d564cd9ecb130c8'
-            'f6ff2d204ffae48316fe355900b8bd3d21557e21c1d569b022da70813770d93c'
+            '99a7e3302883ac7d5404ff88382c4c879e92ab80bcdb3668624587041aa3786e'
+            '83f7c45531645efa6c9d9cade152e80620c1864608ad3349917b3998978fb238'
             '4c900d7272f6210eae732769fa086067307813517ff08a03168144057d1c5afb'
             '92a47fc0e51d6f9eacfa29bcff2e77a47168ce464438c997a96781ce5a0f963a'
             '15a7555274e2e7ac4fc98750a6c65b104ed1e521f761bd7395909d1e2b7ae594')
@@ -50,8 +52,9 @@ package() {
 	install -d -m 0755 ${pkgdir}/usr/bin
 	install -p -m 0755 ${srcdir}/${_pkgbase}-${pkgver}/eoip ${pkgdir}/usr/bin/eoip
 
-	install -d -m 0755 ${pkgdir}/usr/lib/systemd/system
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service.d
 	install -p -m 0644 ${srcdir}/eoip@.service ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service
+	install -p -m 0644 ${srcdir}/wanted-by.conf ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service.d/wanted-by.conf
 
 	install -d -m 0755 ${pkgdir}/usr/lib/${_pkgbase}
 	install -p -m 0755 ${srcdir}/eoip-iface.sh ${pkgdir}/usr/lib/${_pkgbase}/${_pkgbase}-iface.sh
