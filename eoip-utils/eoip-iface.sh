@@ -28,9 +28,13 @@ function eoip_start() {
     fi
 
     if [ -z "${EOIP_LOCAL_ADDR}" ]; then
-        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} remote ${EOIP_REMOTE_ADDR} ${EOIP_EXTRA_PARAMS}
+        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} remote ${EOIP_REMOTE_ADDR}
     else
-        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} local ${EOIP_LOCAL_ADDR} remote ${EOIP_REMOTE_ADDR} ${EOIP_EXTRA_PARAMS}
+        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} local ${EOIP_LOCAL_ADDR} remote ${EOIP_REMOTE_ADDR}
+    fi
+
+    if [ -n "${EOIP_MTU}" ]; then
+        ip link set ${IFACE} mtu ${EOIP_MTU}
     fi
 }
 
