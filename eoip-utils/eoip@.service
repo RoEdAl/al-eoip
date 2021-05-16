@@ -1,6 +1,9 @@
 [Unit]
-Description=EoIP tunnel compatible with MikroTik RouterOS
-Wants=network.target
+Description=EoIP tunnel - %I
+Documentation=https://github.com/bbonev/eoip
+Documentation=https://wiki.mikrotik.com/wiki/Manual:Interface/EoIP
+Wants=network-online.target
+After=network-online.target
  
 [Service]
 Type=oneshot

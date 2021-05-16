@@ -4,3 +4,6 @@ Name=eoip
 [Network]
 DHCP=ipv4
 LinkLocalAddressing=no
+
+[Link]
+RequiredForOnline=no
