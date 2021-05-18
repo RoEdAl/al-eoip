@@ -22,12 +22,14 @@ source=(
 )
 sha256sums=('SKIP'
             '74dda7a32a60aab6c8916c31d68fc191848dd62ab56b0a8cda8ddbfa95a5dbbf'
-            '2f5abef68f2e942ed5384f0d254356bab49b36f2c901896ed80ffc797a0dfa5d'
+            '0ad6ed89514b3519d34da9ab1a8ba0249c6319c368612de68c8677cd4d50f737'
             'e02544464cee816b19f2b4bad898e8b528dd7a187498aab0fbff9830d6eab342'
             'f518ad2b09948963a0398137ef1ba164b1b12e3cd1f183daa04377ec7e9dccd8'
             '83f7c45531645efa6c9d9cade152e80620c1864608ad3349917b3998978fb238'
             '91989942b1b5777ca77b7a0dac4b14ee7ce428ec8d9f86dab73ac4ed6d7bf7b2'
-            '15a7555274e2e7ac4fc98750a6c65b104ed1e521f761bd7395909d1e2b7ae594')
+            'edaa0b7bfc26ff54a0c6d02c25c97ae8eb3beb5e6ee6a07f8a098068d9655cb1')
+
+backup=("etc/conf.d/${_pkgbase}")
 
 pkgver() {
 	cd ${srcdir}/${_pkgbase}

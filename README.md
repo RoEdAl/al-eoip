@@ -8,4 +8,5 @@ Two packages:
 
 More info:
 * https://github.com/bbonev/eoip,
+* https://github.com/Nat-Lab/eoip
 * https://wiki.mikrotik.com/wiki/Manual:Interface/EoIP.
