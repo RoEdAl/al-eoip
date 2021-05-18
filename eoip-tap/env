@@ -1,0 +1,8 @@
+#
+# EoIP
+#
+#EOIP_LOCAL_ADDR=192.168.1.1
+#EOIP_REMOTE_ADDR=192.168.2.1
+#EOIP_TUNNEL_ID=1
+# EoIP protocol overhead = 42 bytes
+#EOIP_MTU=1458

@@ -1,0 +1,71 @@
+# Maintainer: Edmunt Pienkowsky <roed@onet.eu>
+
+_pkgbase=eoip
+pkgname=${_pkgbase}-tap
+pkgver=20190115
+pkgrel=1
+pkgdesc="Implementation of MikroTik\'s EoIP(v6) tunnel using TAP"
+arch=('i686' 'x86_64' 'aarch64' 'armv7h' 'armv6h')
+url='https://github.com/Nat-Lab/eoip'
+license=('MIT')
+conflicts=('eoip-utils' 'eoip-dkms')
+makedepends=('git')
+source=(
+	"git+https://github.com/Nat-Lab/eoip.git"
+	'0001-Simplify-Makefile.patch'
+	'eoip-iface.sh'
+	'eoip.service'
+	'eoip@.service'
+	'wanted-by.conf'
+	'50-eoip.network'
+	'env'
+)
+sha256sums=('SKIP'
+            '74dda7a32a60aab6c8916c31d68fc191848dd62ab56b0a8cda8ddbfa95a5dbbf'
+            '2f5abef68f2e942ed5384f0d254356bab49b36f2c901896ed80ffc797a0dfa5d'
+            'e02544464cee816b19f2b4bad898e8b528dd7a187498aab0fbff9830d6eab342'
+            'f518ad2b09948963a0398137ef1ba164b1b12e3cd1f183daa04377ec7e9dccd8'
+            '83f7c45531645efa6c9d9cade152e80620c1864608ad3349917b3998978fb238'
+            '91989942b1b5777ca77b7a0dac4b14ee7ce428ec8d9f86dab73ac4ed6d7bf7b2'
+            '15a7555274e2e7ac4fc98750a6c65b104ed1e521f761bd7395909d1e2b7ae594')
+
+pkgver() {
+	cd ${srcdir}/${_pkgbase}
+	git log -1 --format=%cd --date=short|tr -d -
+}
+
+prepare() {
+	cd "${srcdir}/${_pkgbase}"
+	for f in "${source[@]}"; do
+		if [[ $f =~ \.patch$ ]]; then
+			msg2 "Applying ${f##*/}"
+			git apply "$srcdir/${f##*/}"
+		fi
+	done
+}
+
+build() {
+	cd "${srcdir}/${_pkgbase}"
+	make
+}
+
+package() {
+	install -d -m 0755 ${pkgdir}/usr/bin
+	install -p -m 0755 ${srcdir}/${_pkgbase}/eoip ${pkgdir}/usr/bin/eoip
+
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service.d
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/system/${_pkgbase}.service.d
+	install -p -m 0644 ${srcdir}/eoip@.service ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service
+	install -p -m 0644 ${srcdir}/eoip.service ${pkgdir}/usr/lib/systemd/system/${_pkgbase}.service
+	install -p -m 0644 ${srcdir}/wanted-by.conf ${pkgdir}/usr/lib/systemd/system/${_pkgbase}@.service.d/wanted-by.conf
+	install -p -m 0644 ${srcdir}/wanted-by.conf ${pkgdir}/usr/lib/systemd/system/${_pkgbase}.service.d/wanted-by.conf
+
+	install -d -m 0755 ${pkgdir}/usr/lib/${_pkgbase}
+	install -p -m 0755 ${srcdir}/eoip-iface.sh ${pkgdir}/usr/lib/${_pkgbase}/${_pkgbase}-iface.sh
+
+	install -d -m 0755 ${pkgdir}/etc/conf.d
+	install -p -m 0644 ${srcdir}/env ${pkgdir}/etc/conf.d/${_pkgbase}
+
+	install -d -m 0755 ${pkgdir}/usr/lib/systemd/network
+	install -p -m 0644 ${srcdir}/50-eoip.network ${pkgdir}/usr/lib/systemd/network/50-${_pkgbase}.network
+}

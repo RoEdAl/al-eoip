@@ -1,0 +1,11 @@
+[Unit]
+Description=EoIP tunnel - TAP implementation
+Documentation=https://github.com/Nat-Lab/eoip
+Documentation=https://wiki.mikrotik.com/wiki/Manual:Interface/EoIP
+Wants=network-online.target
+After=network-online.target
+ 
+[Service]
+EnvironmentFile=/etc/conf.d/%p
+EnvironmentFile=-/etc/conf.d/%p-%p
+ExecStart=/usr/lib/%p/%p-iface.sh

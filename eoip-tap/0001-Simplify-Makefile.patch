@@ -1,0 +1,24 @@
+From f8d3e83ad6fdf71840ba383a6c720d8f0c71c079 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Tue, 18 May 2021 11:15:14 +0200
+Subject: [PATCH] Simplify Makefile
+
+
+diff --git a/Makefile b/Makefile
+index 0f5065a..a29bcd9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,11 +1,10 @@
+-CFLAGS=-std=gnu99 -O3 -Wall
+ OBJS=eoip.o sock.o tap.o eoip-proto.o
+ 
+ eoip: $(OBJS)
+-	$(CC) $(CFLAGS) -o eoip $(OBJS)
++	$(CC) -o $@ $^ $(LDFLAGS)
+ 
+ %.o: %.c
+-	$(CC) -c -o $@ $< $(CFLAGS)
++	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+ 
+ .PHONY: install
+ install:
