@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-function echoerr() {
-    echo "$@" 1>&2;
-}
-
 function show_usage() {
     echo "Usage: ${0/*\//} <eoip-iface> start|stop"
 }
@@ -17,21 +13,7 @@ IFACE="$1"      # EoIP interface
 COMMAND="$2"    # start or stop
 
 function eoip_start() {
-    if [ -z "${EOIP_REMOTE_ADDR}" ]; then
-        echoerr Remote address not specified
-        return 1
-    fi
-
-    if [ -z "${EOIP_TUNNEL_ID}" ]; then
-        echoerr Tunnel ID not specified
-        return 1
-    fi
-
-    if [ -z "${EOIP_LOCAL_ADDR}" ]; then
-        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} remote ${EOIP_REMOTE_ADDR}
-    else
-        eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID} local ${EOIP_LOCAL_ADDR} remote ${EOIP_REMOTE_ADDR}
-    fi
+    eoip add name ${IFACE} tunnel-id ${EOIP_TUNNEL_ID:?} ${EOIP_LOCAL_ADDR:+local ${EOIP_LOCAL_ADDR}} remote ${EOIP_REMOTE_ADDR:?}
 
     if [ -n "${EOIP_MTU}" ]; then
         ip link set ${IFACE} mtu ${EOIP_MTU}
