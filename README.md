@@ -4,9 +4,12 @@ Two packages:
 * [`eoip-dkms`](eoip-dkms) - kernel modules,
 * [`eoip-utils`](eoip-utils) - management utilities.
 
+Userspace implementation:
+* [`eoip-tap`](eoip-tap).
+
 ----
 
 More info:
 * https://github.com/bbonev/eoip,
-* https://github.com/Nat-Lab/eoip
+* https://github.com/Nat-Lab/eoip,
 * https://wiki.mikrotik.com/wiki/Manual:Interface/EoIP.
